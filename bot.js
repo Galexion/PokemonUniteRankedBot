@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 // All Secrets held here
-const config = require("./config.json");
+const config = JSON.parse(fs.readFileSync("./config.json"));
 const prefix = config.prefix;
 const commandFiles = fs.readdirSync('./events/').filter(file => file.endsWith('.js'));
 

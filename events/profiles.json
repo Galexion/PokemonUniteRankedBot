@@ -1,28 +1,24 @@
 [
     {
-    "id": "191375607731453952",
-    "pokemonunitename": "Galexion",
-    "TrainerID": "A8PH9X2",
-    "mains": 
-        {
-            "1": "Cinderace"
+        "id": "191375607731453952",
+        "name": "Galexion",
+        "TrainerID": "A8PH9X2",
+        "mains": {
+            "one": "Cinderace"
         },
-    "rank": 
-        {
+        "rank": {
             "rank": "Great",
             "class": "2"
         }
     },
     {
         "id": "291375607731453952",
-    "pokemonunitename": "Random Guy",
-    "TrainerID": "A1PH9X2",
-    "mains": 
-        {
-            "1": "Cramarant"
+        "name": "Random",
+        "TrainerID": "A1PH9X2",
+        "mains": {
+            "one": "Cramarant"
         },
-    "rank": 
-        {
+        "rank": {
             "rank": "Veteran",
             "class": "5"
         }
