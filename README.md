@@ -1,6 +1,4 @@
-# Discord-API's-bot
-A Discord bot that uses alot of API's.
-
-## how to use:
-The Discord API bot can use a lot of API's that can provide info, or just fun images.
-I am mainly using this list: https://mixedanalytics.com/blog/list-actually-free-open-no-auth-needed-apis/
+=======
+# PokemonUniteRankedBot
+to help find other people to play ranked with.
+>>>>>>> ac53363dee24c627bb118585cb4ed3f3f14b186b
