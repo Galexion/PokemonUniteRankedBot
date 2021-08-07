@@ -9,7 +9,6 @@ module.exports = {
         console.log("Command Recieved");
         switch (args[0]) {
             case "view":
-                
                     console.log(args[1])
                     if (args[1] === undefined) {
                         return message.channel.send("> Please make sure you say a player's **Pokémon Unite** username.")
