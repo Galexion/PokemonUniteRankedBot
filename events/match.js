@@ -13,10 +13,9 @@ module.exports = {
          break
          }
       }
-      console.log(user.name)
       if (user === undefined) {
         console.log("User " + message.author.id + " Cannot use Matchmaking, as no profile has been found.");
-        message.channel.send("> **ERROR**: You can't start Matchmaking without a profile, do **`u.profile`** to get started.")
+       return message.channel.send("> **ERROR**: You can't start Matchmaking without a profile, do **`u.profile`** to get started.")
       } else {
         console.log("Found " + message.author.id + "'s profile, " + user.name + " is currently Rank " + user.rank.rank + " Class " + user.rank.class );
         message.channel.send("> Please Wait, finding you a match...\n> **Details**: Rank " + user.rank.rank + " Class " + user.rank.class + "\n> **ATTENTION**: This is just a placeholder for a embed.")

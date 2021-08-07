@@ -1,4 +1,5 @@
 const fs = require("fs");
+const { messageAttachment } = require("discord.js")
 const embeds = require("./embeds/embeds");
 
 module.exports = {
@@ -90,10 +91,11 @@ module.exports = {
                     }
                 }
                 if (user === undefined) {
-                    console.log("no user by that uuid.");
-                    message.channel.send("> No Profile associated with your account, Starting the Profile Creation Process.");
                     
-                } else {
+                    console.log("> No Profile associated with your account, Starting the Profile Creation Process.");
+                    var create = require("./extentions/profilecreation");
+                    create.run();
+                         } else {
                     console.log("Player " + user.name + " is currently Rank " + user.rank.rank);
                     const userlookup = {
                         "title": `Profile Info: ${user.name}`,

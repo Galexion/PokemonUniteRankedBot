@@ -1,0 +1,20 @@
+== alpha 2 == 
+
+{profile.js / profilecration.js }
+
+added profilecration.js to prevent profile.js from becoming filled with too many lines.
+Added Profile creation.
+
+== alpha 1 ==
+
+{ profile.js }
+
+Added the Path of making a profile.
+
+== alpha 0 ==
+
+- Added Match Making command, Matchmaking not funtional yet.
+
+{ profile.js }
+
+- changed (args[1].length >= 1) to (args[1] !== undefined).
