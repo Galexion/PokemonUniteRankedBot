@@ -9,7 +9,7 @@ module.exports = {
         console.log("Command Recieved");
         switch (args[0]) {
             case "view":
-                if (args[0].length >= 1) {
+                
                     console.log(args[1])
                     if (args[1] === undefined) {
                         return message.channel.send("> Please make sure you say a player's **Pokémon Unite** username.")
@@ -77,10 +77,10 @@ module.exports = {
                             }
                             }
                         }
-                    }
+                    
                 break
             default:
-                if (args[1].length >= 1) { return message.channel.send("> Please check u.help profile.")}
+                if (args[1] !== undefined) { return message.channel.send("> Please check u.help profile.")}
                 var profiles = fs.readFileSync("./events/profiles.json");
                 var profiles_json = JSON.parse(profiles);
                 for (var user_num in profiles_json) {
