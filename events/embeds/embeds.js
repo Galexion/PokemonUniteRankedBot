@@ -1,48 +1,48 @@
 module.exports = {
-    userlookup(user1, message) {
+    userlookup(user, message) {
         console.log(user)
-        user1 = JSON.stringify(user1)
-        console.log(user1)
+        user = JSON.stringify(user)
+        console.log(user)
         const userlookup = {
-            "title": `Profile Info: ${user1.name}`,
+            "title": `Profile Info: ${user.name}`,
             "color": 2884926,
             "footer": {
-                "text": `Pokémon Unite User Lookup / Trainer ID: ${user1.TrainerID}`
+                "text": `Pokémon Unite User Lookup / Trainer ID: ${user.TrainerID}`
             },
             "author": {
                 "name": "Pokémon Unite Ranked Bot: Search Mode"
             },
             "fields": [{
                     "name": "Current MAIN pokémon:",
-                    "value": `${user1.mains.one}`
+                    "value": `${user.mains.one}`
                 },
                 {
                     "name": "Current Rank:",
-                    "value": `${user1.rank.rank} class ${user1.rank.class}`
+                    "value": `${user.rank.rank} class ${user.rank.class}`
                 }
             ]
         };
         const userlookup2 = {
-            "title": `Profile Info: ${user1.name}`,
+            "title": `Profile Info: ${user.name}`,
             "color": 2884926,
             "footer": {
-                "text": `Pokémon Unite User Lookup / Trainer ID: ${user1.TrainerID}`
+                "text": `Pokémon Unite User Lookup / Trainer ID: ${user.TrainerID}`
             },
             "author": {
                 "name": "Pokémon Unite Ranked Bot: Search Mode"
             },
             "fields": [{
                     "name": "Current MAIN pokémon:",
-                    "value": `${user1.mains.one}, ${user1.mains.two}`
+                    "value": `${user.mains.one}, ${user.mains.two}`
                 },
                 {
                     "name": "Current Rank:",
-                    "value": `${user1.rank.rank} class ${user1.rank.class}`
+                    "value": `${user.rank.rank} class ${user.rank.class}`
                 }
             ]
         };
 
-        if (user1.mains.two === undefined) {
+        if (user.mains.two === undefined) {
             message.channel.send({embed: userlookup2});
         } else {
             message.channel.send({embed: userlookup});
