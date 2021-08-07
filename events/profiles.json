@@ -1,6 +1,7 @@
 [
     {
         "id": "191375607731453952",
+        "nameid": "galexion",
         "name": "Galexion",
         "TrainerID": "A8PH9X2",
         "mains": {
@@ -13,6 +14,7 @@
     },
     {
         "id": "291375607731453952",
+        "nameid": "random",
         "name": "Random",
         "TrainerID": "A1PH9X2",
         "mains": {

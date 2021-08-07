@@ -7,3 +7,5 @@ The bot does does not take any personal infomation, unless you feed it that. PLE
 Players are able to view your profile, using the pu!profile command, with the search argument, so please avoid putting any personal infomation on your profile.
 
 Even though the bot is open-source, the Profile database (a JSON file) is stored locally on the hosted server / your personal computer, depending on where you host it.
+
+(Side Note, Profiles.json is a temp file for development purposes only.)
