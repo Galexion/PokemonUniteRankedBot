@@ -1,0 +1,9 @@
+Pokémon Unite Ranked Bot Privacy Policy
+
+This Program takes your public Discord ID to associate you with your Pokémon Unite Ranked Bot Profile.
+
+The bot does does not take any personal infomation, unless you feed it that. PLEASE DON'T DO THAT.
+
+Players are able to view your profile, using the pu!profile command, with the search argument, so please avoid putting any personal infomation on your profile.
+
+Even though the bot is open-source, the Profile database (a JSON file) is stored locally on the hosted server / your personal computer, depending on where you host it.
