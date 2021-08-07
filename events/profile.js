@@ -26,10 +26,6 @@ module.exports = {
                                 console.log("no user by that uuid.");
                                  return message.channel.send("> No User found. Did you type in the person's **Pokémon Unite** Username?")
                             } else {
-<<<<<<< HEAD
-                                console.log("Player " + user1.name + " is currently Rank " + user1.rank.rank);
-                                
-=======
                                 console.log("Player " + user.name + " is currently Rank " + user.rank.rank);
                                 if(user.mains.two === null) {
                                     message.channel.send({embed: userLookup2})
@@ -79,7 +75,6 @@ module.exports = {
                                     }
                                 }
                             }
->>>>>>> d0d618f7f7730920e5e2fe5cce052c5a006c69f9
                             }
                         }
                     
@@ -99,10 +94,6 @@ module.exports = {
                     message.channel.send("> No Profile associated with your account, Starting the Profile Creation Process.");
                     
                 } else {
-<<<<<<< HEAD
-                    console.log("Player " + user1.name + " is currently Rank " + user1.rank.rank)
-                    
-=======
                     console.log("Player " + user.name + " is currently Rank " + user.rank.rank);
                     const userlookup = {
                         "title": `Profile Info: ${user.name}`,
@@ -147,7 +138,6 @@ module.exports = {
                     } else {
                         message.channel.send({embed: userlookup});
                     }
->>>>>>> d0d618f7f7730920e5e2fe5cce052c5a006c69f9
                 }
                 break;
         }
