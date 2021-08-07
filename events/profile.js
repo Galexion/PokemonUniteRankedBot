@@ -26,7 +26,7 @@ module.exports = {
                                 message.channel.send("> No User found. Did you type in the person's **Pokémon Unite** Username?")
                             } else {
                                 console.log("Player " + user1.name + " is currently Rank " + user1.rank.rank);
-                                embeds.userlookup(message,user11);
+                                
                             }
                         }
                     }
@@ -47,7 +47,7 @@ module.exports = {
                     
                 } else {
                     console.log("Player " + user1.name + " is currently Rank " + user1.rank.rank)
-                    embeds.userlookup(message,user1);
+                    
                 }
                 break;
         }
