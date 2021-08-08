@@ -1,8 +1,7 @@
-== alpha 2 == 
+== alpha 2 (Not Complete) == 
 
-{profile.js / profilecration.js }
+{profile.js }
 
-added profilecration.js to prevent profile.js from becoming filled with too many lines.
 Added Profile creation.
 
 == alpha 1 ==

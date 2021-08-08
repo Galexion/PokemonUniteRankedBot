@@ -1,6 +1,43 @@
 const fs = require("fs");
 const { messageAttachment } = require("discord.js")
 const embeds = require("./embeds/embeds");
+var timeout = "You have Exceeded the Time limit. Profile Creation has been canceled."
+function setup(message) {
+    const filter = m => m.author.id ===  message.author.id;
+    var usercancel = "Profile Creation has been canceled. do `u.profile to start it again.";
+    message.channel.send("Attention: Your setup may be interupted because of a restart." + "\n\n> Enter your **Pokémon Unite** username.\n> Warning: Use your **Pokémon Unite** username. This is so people can find you when needed.\n> (oh, and BTW, if your in game name IS cancel, I am so sorry. contact @Galexion#0612 for you to set it up.)").then(
+message.channel.awaitMessages(filter, {
+max: 1, // leave this the same
+time: 20000, // time in MS. there are 1000 MS in a second
+   }).then(async(collected) => {
+    if(collected.first().content == 'cancel'){
+    message.reply(usercancel)
+} // This area is if the user did not reply "cancel".
+var username = collected.first().content;
+console.log(message.author.id + '\'s Username : ' + username)
+                                                                    //Question 2
+message.channel.send("> What is your Trainer ID?\n> This can be found under the username").then(
+    message.channel.awaitMessages(filter, {
+    max: 1, // leave this the same
+    time: 20000, // time in MS. there are 1000 MS in a second
+       }).then(async(collected) => {
+        if(collected.first().content == 'cancel'){
+        message.reply(usercancel)
+    } // This area is if the user did not reply "cancel".
+    var username = collected.first().content;
+    console.log(message.author.id + '\'s Username : ' + username)
+                                                                    //Question 3
+    message.channel.send("If your Reading this, it whent right.")
+    }).catch(() => {
+        // what to do if a user takes too long goes here 
+    message.reply(timeout); 
+    }))
+}).catch(() => {
+    // what to do if a user takes too long goes here 
+message.reply(timeout); 
+}));
+
+}
 
 module.exports = {
     name: 'profile',
@@ -92,8 +129,7 @@ module.exports = {
                 if (user === undefined) {
                     
                     console.log("> No Profile associated with your account, Starting the Profile Creation Process.");
-                    var create = require("./extentions/profilecreation");
-                    create.run();
+                    setup(message)
                          } else {
                     console.log("Player " + user.name + " is currently Rank " + user.rank.rank);
                     const userlookup = {
