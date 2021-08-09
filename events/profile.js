@@ -1,6 +1,7 @@
 const fs = require("fs");
 const { messageAttachment } = require("discord.js")
 const embeds = require("./embeds/embeds");
+const { profile } = require("console");
 var timeout = "You have Exceeded the Time limit. Profile Creation has been canceled."
 function setup(message) {
     const filter = m => m.author.id ===  message.author.id;
@@ -24,10 +25,55 @@ message.channel.send("> What is your Trainer ID?\n> This can be found under the 
         if(collected.first().content == 'cancel'){
         message.reply(usercancel)
     } // This area is if the user did not reply "cancel".
-    var username = collected.first().content;
-    console.log(message.author.id + '\'s Username : ' + username)
+    var userid = collected.first().content;
+    console.log(message.author.id + '\'s Unite ID : ' + userid)
                                                                     //Question 3
-    message.channel.send("If your Reading this, it whent right.")
+    message.channel.send("> If you use any Pokemon as your current main, put it here. (This is a string).\n> Misuse of this line will get your account terminated. Do not use it for anything else but Pokemon.").then(
+        message.channel.awaitMessages(filter, {
+        max: 1, // leave this the same
+        time: 20000, // time in MS. there are 1000 MS in a second
+           }).then(async(collected) => {
+            if(collected.first().content == 'cancel'){
+            message.reply(usercancel)
+        } // This area is if the user did not reply "cancel".
+        var userpokemains = collected.first().content;
+        console.log(message.author.id + '\'s Username : ' + userpokemains)
+                                                                        //Question 4
+        message.channel.send("> Confirm that all is correct.\n> Username: " + username + "\n> User ID: " + userid + "\n> Your Mains: " + userpokemains + "\n > Confirm with `yes` or cancel with `cancel` and restart with `u.profile`. You Can't change this afterwards unless you contact Galexion#0612.").then(
+            message.channel.awaitMessages(filter, {
+            max: 1, // leave this the same
+            time: 20000, // time in MS. there are 1000 MS in a second
+               }).then(async(collected) => {
+                if(collected.first().content == 'cancel'){
+                message.reply(usercancel)
+            } // This area is if the user did not reply "cancel".
+            var profile = {
+                id: message.author.id,
+                username: username,
+                TrainerID: userid,
+                mains: {
+                    one: userpokemains
+                 }
+            }
+            fs.readFile('./events/profiles.json', JSON.stringify(profile), 'utf8', function callback(err, data){
+                if (err){
+                    console.log(err);
+                } else {
+                obj = JSON.parse(data); //now it an object
+                obj.push({profile}); //add some data
+                json = JSON.stringify(obj); //convert it back to json
+                fs.writeFile('./events/profiles.json', json, 'utf8', callback); // write it back 
+            }});
+            console.log(profile)
+        })).catch(() => {
+            // what to do if a user takes too long goes here 
+        message.reply(timeout); 
+        })        
+        
+        }).catch(() => {
+            // what to do if a user takes too long goes here 
+        message.reply(timeout); 
+        }))
     }).catch(() => {
         // what to do if a user takes too long goes here 
     message.reply(timeout); 
