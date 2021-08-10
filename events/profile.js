@@ -37,8 +37,8 @@ message.channel.send("> What is your Trainer ID?\n> This can be found under the 
             message.reply(usercancel)
         } // This area is if the user did not reply "cancel".
         var userpokemains = collected.first().content;
-        console.log(message.author.id + '\'s Username : ' + userpokemains)
-                                                                        //Question 4
+        console.log(message.author.id + '\'s Pokemon Mains : ' + userpokemains)
+                                                                     //Question 4
         message.channel.send("> Confirm that all is correct.\n> Username: " + username + "\n> User ID: " + userid + "\n> Your Mains: " + userpokemains + "\n > Confirm with `yes` or cancel with `cancel` and restart with `u.profile`. You Can't change this afterwards unless you contact Galexion#0612.").then(
             message.channel.awaitMessages(filter, {
             max: 1, // leave this the same
@@ -51,18 +51,14 @@ message.channel.send("> What is your Trainer ID?\n> This can be found under the 
                 id: message.author.id,
                 username: username,
                 TrainerID: userid,
-                mains: {
-                    one: userpokemains
-                 }
+                mains: userpokemains
             }
-            fs.readFile('./events/profiles.json', JSON.stringify(profile), 'utf8', function callback(err, data){
+            fs.readFile('./events/profiles.json', 'utf8', function callback(err, data){
                 if (err){
                     console.log(err);
                 } else {
-                obj = JSON.parse(data); //now it an object
-                obj.push({profile}); //add some data
-                json = JSON.stringify(obj); //convert it back to json
-                fs.writeFile('./events/profiles.json', json, 'utf8', callback); // write it back 
+                var profileadd = require("./extentions/profileadd");
+                profileadd.execute(data,profile)
             }});
             console.log(profile)
         })).catch(() => {
