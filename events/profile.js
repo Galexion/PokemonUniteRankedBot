@@ -47,9 +47,8 @@ async function setup(message, db) {
                                         message.reply(usercancel)
                                     } // This area is if the user did not reply "cancel".
                                     var profile = {
-                                        id: message.author.id,
-                                        username: username,
-                                        TrainerID: userid,
+                                        name: username,
+                                        ID: userid,
                                         mains: { one: userpokemains },
                                         rank: {
                                             rank: "Beginner",
@@ -91,14 +90,17 @@ module.exports = {
                 if (args[1] === undefined) {
                     return message.channel.send("> Please make sure you say a player's **Pokémon Unite** username.")
                 } else {
-                    console.log(message.author.id)
-                    var data = db.collection('users').doc(message.author.id)
-                    var user = data.data()
+                    await console.log(message.author.id)
+                    var data = db.collection('users').get()
+                    if (data.data.name === undefined) {
+                        let user = null
+                    } else {
+                        let user = data.data()
+                    }
                     if (user === undefined) {
                         console.log("no user by that uuid.");
                         return message.channel.send("> No User found. Did you type in the person's **Pokémon Unite** Username?")
                     } else {
-                        console.log("Player " + user.name + " is currently Rank " + user.rank.rank);
                         if (user.mains.two === null) {
                             message.channel.send({ embed: userLookup2 })
                         } else {
@@ -106,7 +108,7 @@ module.exports = {
                                 "title": `Profile Info: ${user.name}`,
                                 "color": 2884926,
                                 "footer": {
-                                    "text": `Pokémon Unite User Lookup / Trainer ID: ${user.TrainerID}`
+                                    "text": `Pokémon Unite User Lookup / Trainer ID: ${user.ID}`
                                 },
                                 "author": {
                                     "name": "Pokémon Unite Ranked Bot: Search Mode"
@@ -125,7 +127,7 @@ module.exports = {
                                 "title": `Profile Info: ${user.name}`,
                                 "color": 2884926,
                                 "footer": {
-                                    "text": `Pokémon Unite User Lookup / Trainer ID: ${user.TrainerID}`
+                                    "text": `Pokémon Unite User Lookup / Trainer ID: ${user.ID}`
                                 },
                                 "author": {
                                     "name": "Pokémon Unite Ranked Bot: Search Mode"
@@ -157,17 +159,16 @@ module.exports = {
                 var profiles = await data.get();
                 var user = profiles.data();
         }
-        if (profiles === undefined) {
+        if (profiles === undefined || user === undefined) {
 
             console.log("> No Profile associated with your account, Starting the Profile Creation Process.");
             setup(message, db)
         } else {
-            console.log("Player " + user.name + " is currently Rank " + user.rank.rank);
             const userlookup = {
                 "title": `Profile Info: ${user.name}`,
                 "color": 2884926,
                 "footer": {
-                    "text": `Pokémon Unite User Lookup / Trainer ID: ${user.TrainerID}`
+                    "text": `Pokémon Unite User Lookup / Trainer ID: ${user.ID}`
                 },
                 "author": {
                     "name": "Pokémon Unite Ranked Bot: Search Mode"
@@ -186,7 +187,7 @@ module.exports = {
                 "title": `Profile Info: ${user.name}`,
                 "color": 2884926,
                 "footer": {
-                    "text": `Pokémon Unite User Lookup / Trainer ID: ${user.TrainerID}`
+                    "text": `Pokémon Unite User Lookup / Trainer ID: ${user.ID}`
                 },
                 "author": {
                     "name": "Pokémon Unite Ranked Bot: Search Mode"
