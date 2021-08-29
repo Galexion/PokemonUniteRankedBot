@@ -1,8 +1,9 @@
 {
   "dependencies": {
     "discord.js": "^12.5.3",
-    "fs": "0.0.1-security",
-    "node-rest-client": "^3.1.0",
+    "firebase-admin": "^9.11.1",
+    "fs": "^0.0.1-security",
+    "node-rest-client": "^1.4.4",
     "rest": "^2.0.0"
   }
 }
