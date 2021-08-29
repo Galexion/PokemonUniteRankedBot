@@ -61,21 +61,16 @@ async function setup(message, db) {
                                 })).catch(() => {
                                     // what to do if a user takes too long goes here 
                                     message.reply(timeout);
-                                })
-
-                        }).catch(() => {
+                                })}).catch(() => {
                             // what to do if a user takes too long goes here 
                             message.reply(timeout);
-                        }))
-                }).catch(() => {
+                        }))}).catch(() => {
                     // what to do if a user takes too long goes here 
                     message.reply(timeout);
-                }))
-        }).catch(() => {
+                }))}).catch(() => {
             // what to do if a user takes too long goes here 
             message.reply(timeout);
         }));
-
 }
 
 module.exports = {
