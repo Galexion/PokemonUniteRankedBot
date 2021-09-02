@@ -1,4 +1,10 @@
-== alpha 2 (Not Complete) == 
+== alpha 3 (WIP) ==
+
+{ rank.js }
+
+Displays your rank.
+
+== alpha 2 == 
 
 {profile.js }
 

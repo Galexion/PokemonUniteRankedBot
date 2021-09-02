@@ -38,45 +38,38 @@ async function setup(message, db) {
                             var userpokemains = collected.first().content;
                             console.log(message.author.id + '\'s Pokemon Mains : ' + userpokemains)
                             //Question 4
-                            message.channel.send("> Confirm that all is correct.\n> Username: " + username + "\n> User ID: " + userid + "\n> Your Mains: " + userpokemains + "\n > Confirm with `yes` or cancel with `cancel` and restart with `u.profile`. You Can't change this afterwards unless you contact Galexion#0612.").then(
+                            message.channel.send("> Confirm that all is correct.\n> Username: " + username + "\n> User ID: " + userid + "\n> Your Mains: " + userpokemains + "\n > Confirm with `yes` or cancel with `cancel` and restart with `u.profile`.\n> ATTN: **After this, head to `u.rank` to change your rank.**\n>You Can't change this afterwards unless you contact Galexion#0612.").then(
                                 message.channel.awaitMessages(filter, {
-                                    max: 1, // leave this the same
-                                    time: 20000, // time in MS. there are 1000 MS in a second
+                                    max: 1,
+                                    time: 20000
                                 }).then(async (collected) => {
                                     if (collected.first().content == 'cancel') {
                                         message.reply(usercancel)
-                                    } // This area is if the user did not reply "cancel".
-                                    var profile = {
-                                        name: username,
-                                        ID: userid,
-                                        mains: { one: userpokemains },
-                                        rank: {
-                                            rank: "Beginner",
-                                            class: "1"
-                                        }
                                     }
-                                    var write = db.collection('users').doc(message.author.id)
-                                    var writeprofile = await write.set(profile)
-                                    console.log("Added document with ID: " + writeprofile.id)
-                                })).catch(() => {
-                                    // what to do if a user takes too long goes here 
-                                    message.reply(timeout);
-                                })}).catch(() => {
+                                    const doc = db.collection('users').doc(message.author.id)
+                                    await doc.set({ id: message.author.id, name: username, TrainerID: userid, mains: { one: userpokemains }, rank: { rank:'Beginner', class:'1'}})
+                                })
+                            )
+
+                        }).catch(() => {
                             // what to do if a user takes too long goes here 
                             message.reply(timeout);
-                        }))}).catch(() => {
+                        }))
+                }).catch(() => {
                     // what to do if a user takes too long goes here 
                     message.reply(timeout);
-                }))}).catch(() => {
+                }))
+        }).catch(() => {
             // what to do if a user takes too long goes here 
             message.reply(timeout);
         }));
+
 }
 
 module.exports = {
     name: 'profile',
     description: 'Set up your Profile, see it, and view others.',
-     async execute(message, args, client, db) {
+    async execute(message, args, client, db) {
         var user = undefined;
         console.log("Command Recieved");
         switch (args[0]) {
@@ -87,11 +80,7 @@ module.exports = {
                 } else {
                     await console.log(message.author.id)
                     var data = db.collection('users').get()
-                    if (data.data.name === undefined) {
-                        let user = null
-                    } else {
-                        let user = data.data()
-                    }
+                    let user = data.data()
                     if (user === undefined) {
                         console.log("no user by that uuid.");
                         return message.channel.send("> No User found. Did you type in the person's **Pokémon Unite** Username?")
@@ -103,7 +92,7 @@ module.exports = {
                                 "title": `Profile Info: ${user.name}`,
                                 "color": 2884926,
                                 "footer": {
-                                    "text": `Pokémon Unite User Lookup / Trainer ID: ${user.ID}`
+                                    "text": `Pokémon Unite User Lookup / Trainer ID: ${user.TrainerID}`
                                 },
                                 "author": {
                                     "name": "Pokémon Unite Ranked Bot: Search Mode"
@@ -122,7 +111,7 @@ module.exports = {
                                 "title": `Profile Info: ${user.name}`,
                                 "color": 2884926,
                                 "footer": {
-                                    "text": `Pokémon Unite User Lookup / Trainer ID: ${user.ID}`
+                                    "text": `Pokémon Unite User Lookup / Trainer ID: ${user.TrainerID}`
                                 },
                                 "author": {
                                     "name": "Pokémon Unite Ranked Bot: Search Mode"
@@ -163,7 +152,7 @@ module.exports = {
                 "title": `Profile Info: ${user.name}`,
                 "color": 2884926,
                 "footer": {
-                    "text": `Pokémon Unite User Lookup / Trainer ID: ${user.ID}`
+                    "text": `Pokémon Unite User Lookup / Trainer ID: ${user.TrainerID}`
                 },
                 "author": {
                     "name": "Pokémon Unite Ranked Bot: Search Mode"
@@ -182,7 +171,7 @@ module.exports = {
                 "title": `Profile Info: ${user.name}`,
                 "color": 2884926,
                 "footer": {
-                    "text": `Pokémon Unite User Lookup / Trainer ID: ${user.ID}`
+                    "text": `Pokémon Unite User Lookup / Trainer ID: ${user.TrainerID}`
                 },
                 "author": {
                     "name": "Pokémon Unite Ranked Bot: Search Mode"
