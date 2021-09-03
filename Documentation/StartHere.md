@@ -10,11 +10,11 @@ TLDR;
 
 ### Section 1.1: required packages
 
-This bot uses 2 Main libarys, Eris & Firebase-admin.
+This bot uses 3 Main libarys, Eris & Firebase-admin.
 
 To install these, use
 
-> npm i eris firebase-admin
+> npm i eris pluris firebase-admin
 
 ### Section 1.2: config.json & firebase.json
 

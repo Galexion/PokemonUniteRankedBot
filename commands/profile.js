@@ -25,7 +25,7 @@ async function setup(message, db) {
     };
 
     console.log(message.author.id + '\'s Username : ' + usernameContent);
-
+    let name = usernameContent
     /* Second Section */
     await message.channel.createMessage("> What is your Trainer ID?\n> This can be found under the username")
     let trainer = await message.channel.awaitMessages(messagesFilter);
@@ -37,7 +37,7 @@ async function setup(message, db) {
     };
 
     console.log(message.author.id + '\'s Unite ID : ' + trainerContent);
-
+    let userid = trainerContent
     /* Third Section */
     await message.channel.createMessage("> If you use any Pokemon as your current main, put it here. (This is a string).\n> Misuse of this line will get your account terminated. Do not use it for anything else but Pokemon.")
     let pokemon = await message.channel.awaitMessages(messagesFilter);
@@ -49,9 +49,9 @@ async function setup(message, db) {
     };
 
     console.log(message.author.id + '\'s Pokemon Mains : ' + pokemonContent);
-
+    let userpokemains = pokemonContent
     /* Fourth Section */
-    await message.channel.createMessage("> Confirm that all is correct.\n> Username: " + username + "\n> User ID: " + userid + "\n> Your Mains: " + userpokemains + "\n > Confirm with `yes` or cancel with `cancel` and restart with `u.profile`.\n> ATTN: **After this, head to `u.rank` to change your rank.**\n>You Can't change this afterwards unless you contact Galexion#0612.");
+    await message.channel.createMessage("> Confirm that all is correct.\n> Username: " + name + "\n> User ID: " + userid + "\n> Your Mains: " + userpokemains + "\n > Confirm with `yes` or cancel with `cancel` and restart with `u.profile`.\n> ATTN: **After this, head to `u.rank` to change your rank.**\n>You Can't change this afterwards unless you contact Galexion#0612.");
     let prompt = await message.channel.awaitMessages(messagesFilter);
     if (!prompt.collected.size) return message.channel.createMessage(timeout);
 
@@ -62,7 +62,7 @@ async function setup(message, db) {
 
     // You want to add promptContent === "no" or sorta next time, something that suits to you :)
     const doc = db.collection('users').doc(message.author.id);
-    await doc.set({ id: message.author.id, name: username, TrainerID: userid, mains: { one: userpokemains }, rank: { rank: 'Beginner', class: '1' } })
+    await doc.set({ id: message.author.id, name: name, TrainerID: userid, mains: { one: userpokemains }, rank: { rank: 'Beginner', class: '1' } })
 };
 
 module.exports = {
