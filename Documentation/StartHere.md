@@ -30,3 +30,11 @@ Put that in the folder, and rename it to "firebase.json".
 
 ### config.json
 
+Set config.json like this.
+
+> { "token":"yourtokenhere","prefix":"u."}
+
+
+## And that's it!
+
+if you set everything up correctly, users should be able to use the profile command to set up a profile and have it post in firebase.
