@@ -8,16 +8,16 @@ module.exports = {
         let userdebug = await user.get()
         let userinfo = userdebug.data()
         message.channel.createMessage({
-             content:`> ${userinfo.name}'s Rank info\n> Rank ${userinfo.rank.rank} Class ${userinfo.rank.class}\n> To change this, choose from the buttons below.`,
-             components: [{
-                 "type": 1,
-                 "components": [{
+            content:`> ${userinfo.name}'s Rank info\n> Rank ${userinfo.rank.rank} Class ${userinfo.rank.class}\n> To change this, choose from the buttons below.`,
+            components: [{
+                "type": 1,
+                "components": [{
                     "type": 2,
                     "label": "Change Rank",
                     "style":1,
                     "custom_id":"rankChange" 
-                 }]
-             }]
-    })   
+                }]
+            }]
+        })
     }
 }
