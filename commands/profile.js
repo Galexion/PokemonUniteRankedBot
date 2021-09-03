@@ -3,16 +3,16 @@ var timeout = "You have Exceeded the Time limit. Profile Creation has been cance
 
 async function setup(message, db) {
     const filter = m => m.author.id === message.author.id;
-    let usercancel = "Profile Creation has been canceled. do `u.profile to start it again.";
+    let usercancel = "Profile Creation has been canceled. do ``u.profile to start it again.``";
 
     let messagesFilter = {
-      max: 1, // leave this the same
-      time: 20000, // time in MS. there are 1000 MS in a second 
-      filter
+        max: 1, // leave this the same
+        time: 20000, // time in MS. there are 1000 MS in a second 
+        filter
     }; // Seems repetitive, I'll put this here anyway.
 
     /* First Section */
-    await message.channel.createMessage("Attention: Your setup may be interupted because of a restart." + "\n\n> Enter your **Pokémon Unite** username.\n> Warning: Use your **Pokémon Unite** username. This is so people can find you when needed.\n> (oh, and BTW, if your in game name IS cancel, I am so sorry. contact @Galexion#0612 for you to set it up.)")
+    await message.channel.createMessage(`Attention: Your setup may be interupted because of a restart.\n\n> Enter your **Pokémon Unite** username.\n> Warning: Use your **Pokémon Unite** username. This is so people can find you when needed.\n> (oh, and BTW, if your in game name IS cancel, I am so sorry. contact @Galexion#0612 for you to set it up.)`)
     let username = await message.channel.awaitMessages(messagesFilter);
     if (!username.collected.size) return message.channel.createMessage(timeout);
 
@@ -20,12 +20,13 @@ async function setup(message, db) {
 
     // This area is if the user did not reply "cancel".
     if (usernameContent === 'cancel') {
-      return message.channel.createMessage(usercancel);
-      // Use return, to break the whole thing, cuz its cancelled btw.
+        return message.channel.createMessage(usercancel);
+        // Use return, to break the whole thing, cuz its cancelled btw.
     };
 
     console.log(message.author.id + '\'s Username : ' + usernameContent);
     let name = usernameContent
+
     /* Second Section */
     await message.channel.createMessage("> What is your Trainer ID?\n> This can be found under the username")
     let trainer = await message.channel.awaitMessages(messagesFilter);
@@ -33,11 +34,12 @@ async function setup(message, db) {
 
     let trainerContent = trainer.collected.entries().next().value.pop().content;
     if (trainerContent === 'cancel') {
-      return message.channel.createMessage(usercancel);
+        return message.channel.createMessage(usercancel);
     };
 
-    console.log(message.author.id + '\'s Unite ID : ' + trainerContent);
+    console.log(`${message.author.id}'s Unite ID : ${trainerContent}`);
     let userid = trainerContent
+
     /* Third Section */
     await message.channel.createMessage("> If you use any Pokemon as your current main, put it here. (This is a string).\n> Misuse of this line will get your account terminated. Do not use it for anything else but Pokemon.")
     let pokemon = await message.channel.awaitMessages(messagesFilter);
@@ -45,19 +47,20 @@ async function setup(message, db) {
 
     let pokemonContent = pokemon.collected.entries().next().value.pop().content;
     if (pokemonContent === 'cancel') {
-      return message.channel.createMessage(usercancel);
+        return message.channel.createMessage(usercancel);
     };
 
-    console.log(message.author.id + '\'s Pokemon Mains : ' + pokemonContent);
+    console.log(`${message.author.id}'s Pokemon Mains : ${pokemonContent}`);
     let userpokemains = pokemonContent
+
     /* Fourth Section */
-    await message.channel.createMessage("> Confirm that all is correct.\n> Username: " + name + "\n> User ID: " + userid + "\n> Your Mains: " + userpokemains + "\n > Confirm with `yes` or cancel with `cancel` and restart with `u.profile`.\n> ATTN: **After this, head to `u.rank` to change your rank.**\n>You Can't change this afterwards unless you contact Galexion#0612.");
+    await message.channel.createMessage(`> Confirm that all is correct.\n> Username: ${name}\n> User ID: ${userid}\n> Your Mains: ${userpokemains}\n > Confirm with \`yes\` or cancel with \`cancel\` and restart with \`u.profile\`.\n> ATTN: **After this, head to \`u.rank\` to change your rank.**\n>You Can't change this afterwards unless you contact Galexion#0612.`);
     let prompt = await message.channel.awaitMessages(messagesFilter);
     if (!prompt.collected.size) return message.channel.createMessage(timeout);
 
     let promptContent = prompt.collected.entries().next().value.pop().content;
     if (promptContent === 'cancel') {
-      return message.channel.createMessage(usercancel);
+        return message.channel.createMessage(usercancel);
     };
 
     // You want to add promptContent === "no" or sorta next time, something that suits to you :)
@@ -94,18 +97,18 @@ module.exports = {
                                 "title": `Profile Info: ${user.name}`,
                                 "color": 2884926,
                                 "footer": {
-                                  "text": `Pokémon Unite User Lookup / Trainer ID: ${user.TrainerID}`
+                                    "text": `Pokémon Unite User Lookup / Trainer ID: ${user.TrainerID}`
                                 },
                                 "author": {
-                                  "name": "Pokémon Unite Ranked Bot: Search Mode"
+                                    "name": "Pokémon Unite Ranked Bot: Search Mode"
                                 },
                                 "fields": [{
-                                  "name": "Current MAIN pokémon:",
-                                  "value": `${user.mains.one}`
+                                    "name": "Current MAIN pokémon:",
+                                    "value": `${user.mains.one}`
                                 },
                                 {
-                                  "name": "Current Rank:",
-                                  "value": `${user.rank.rank} class ${user.rank.class}`
+                                    "name": "Current Rank:",
+                                    "value": `${user.rank.rank} class ${user.rank.class}`
                                 }]
                             };
 
@@ -113,18 +116,18 @@ module.exports = {
                                 "title": `Profile Info: ${user.name}`,
                                 "color": 2884926,
                                 "footer": {
-                                  "text": `Pokémon Unite User Lookup / Trainer ID: ${user.TrainerID}`
+                                    "text": `Pokémon Unite User Lookup / Trainer ID: ${user.TrainerID}`
                                 },
                                 "author": {
-                                  "name": "Pokémon Unite Ranked Bot: Search Mode"
+                                    "name": "Pokémon Unite Ranked Bot: Search Mode"
                                 },
                                 "fields": [{
-                                  "name": "Current MAIN pokémon:",
-                                  "value": `${user.mains.one}, ${user.mains.two}`
+                                    "name": "Current MAIN pokémon:",
+                                    "value": `${user.mains.one}, ${user.mains.two}`
                                 },
                                 {
-                                  "name": "Current Rank:",
-                                  "value": `${user.rank.rank} class ${user.rank.class}`
+                                    "name": "Current Rank:",
+                                    "value": `${user.rank.rank} class ${user.rank.class}`
                                 }]
                             };
                             
@@ -198,7 +201,7 @@ module.exports = {
 };
 /*
 
-  /*
+    /*
     let userid = message.author.id
     const findprofile = profiles.data;
     console.log("looking for " + userid + "'s profile.");
