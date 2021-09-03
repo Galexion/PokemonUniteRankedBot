@@ -1,5 +1,5 @@
 {
-  "name": "PokemonUniteRankedBot",
+  "name": "pokeranked",
   "packageManager": "yarn@3.0.1",
   "scripts": {
     "test": "echo \"Not Configured Yet.\""
