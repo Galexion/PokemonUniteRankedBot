@@ -2,13 +2,15 @@
 # PokemonUniteRankedBot
 to help find other people to play ranked with.
 
-# ATTN: This project is on hold to relearn Discord.JS for DJS v13.
+# ATTN: This is a experimental build running ERIS.
 
-Why is this?
+Why? 
 
-- Discord.JS v13 requires gateways. gotta calculate what I need for this.
-- The Buttons system requires Slash Commands to my knowledge.
-- Discord.JS v13 is just WACK lol
+Discord.JS v13 adds features that make things I could do in v12 impossible.
+
+also figuring out intents is wack
+
+This branch will be behind the main release.
 
 ## Issues with the code At the Moment
 

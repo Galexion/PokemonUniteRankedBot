@@ -1,67 +1,68 @@
-const fs = require("fs");
-const { messageAttachment } = require("discord.js")
-const embeds = require("./embeds/embeds");
+
 var timeout = "You have Exceeded the Time limit. Profile Creation has been canceled."
 async function setup(message, db) {
     const filter = m => m.author.id === message.author.id;
     var usercancel = "Profile Creation has been canceled. do `u.profile to start it again.";
-    message.channel.send("Attention: Your setup may be interupted because of a restart." + "\n\n> Enter your **Pokémon Unite** username.\n> Warning: Use your **Pokémon Unite** username. This is so people can find you when needed.\n> (oh, and BTW, if your in game name IS cancel, I am so sorry. contact @Galexion#0612 for you to set it up.)").then(
-        message.channel.awaitMessages(filter, {
+    message.channel.createMessage("Attention: Your setup may be interupted because of a restart." + "\n\n> Enter your **Pokémon Unite** username.\n> Warning: Use your **Pokémon Unite** username. This is so people can find you when needed.\n> (oh, and BTW, if your in game name IS cancel, I am so sorry. contact @Galexion#0612 for you to set it up.)").then(
+        message.channel.awaitMessages({
             max: 1, // leave this the same
-            time: 20000, // time in MS. there are 1000 MS in a second
+            time: 20000, // time in MS. there are 1000 MS in a second 
+            filter: m => m.author.id === message.author.id
         }).then(async (collected) => {
             if (collected.first().content == 'cancel') {
-                message.reply(usercancel)
+                message.channel.createMessage(usercancel)
             } // This area is if the user did not reply "cancel".
             var username = collected.first().content;
             console.log(message.author.id + '\'s Username : ' + username)
             //Question 2
-            message.channel.send("> What is your Trainer ID?\n> This can be found under the username").then(
-                message.channel.awaitMessages(filter, {
+            message.channel.createMessage("> What is your Trainer ID?\n> This can be found under the username").then(
+                message.channel.awaitMessages({
                     max: 1, // leave this the same
-                    time: 20000, // time in MS. there are 1000 MS in a second
+                    time: 20000, // time in MS. there are 1000 MS in a second 
+                    filter: m => m.author.id === message.author.id
                 }).then(async (collected) => {
                     if (collected.first().content == 'cancel') {
-                        message.reply(usercancel)
+                        message.channel.createMessage(usercancel)
                     } // This area is if the user did not reply "cancel".
                     var userid = collected.first().content;
                     console.log(message.author.id + '\'s Unite ID : ' + userid)
                     //Question 3
-                    message.channel.send("> If you use any Pokemon as your current main, put it here. (This is a string).\n> Misuse of this line will get your account terminated. Do not use it for anything else but Pokemon.").then(
+                    message.channel.createMessage("> If you use any Pokemon as your current main, put it here. (This is a string).\n> Misuse of this line will get your account terminated. Do not use it for anything else but Pokemon.").then(
                         message.channel.awaitMessages(filter, {
                             max: 1, // leave this the same
                             time: 20000, // time in MS. there are 1000 MS in a second
                         }).then(async (collected) => {
                             if (collected.first().content == 'cancel') {
-                                message.reply(usercancel)
+                                message.channel.createMessage(usercancel)
                             } // This area is if the user did not reply "cancel".
                             var userpokemains = collected.first().content;
                             console.log(message.author.id + '\'s Pokemon Mains : ' + userpokemains)
                             //Question 4
-                            message.channel.send("> Confirm that all is correct.\n> Username: " + username + "\n> User ID: " + userid + "\n> Your Mains: " + userpokemains + "\n > Confirm with `yes` or cancel with `cancel` and restart with `u.profile`.\n> ATTN: **After this, head to `u.rank` to change your rank.**\n>You Can't change this afterwards unless you contact Galexion#0612.").then(
-                                message.channel.awaitMessages(filter, {
-                                    max: 1,
-                                    time: 20000
+                            message.channel.createMessage("> Confirm that all is correct.\n> Username: " + username + "\n> User ID: " + userid + "\n> Your Mains: " + userpokemains + "\n > Confirm with `yes` or cancel with `cancel` and restart with `u.profile`.\n> ATTN: **After this, head to `u.rank` to change your rank.**\n>You Can't change this afterwards unless you contact Galexion#0612.").then(
+                                message.channel.awaitMessages({
+                                    max: 1, // leave this the same
+                                    time: 20000, // time in MS. there are 1000 MS in a second 
+                                    filter: m => m.author.id === message.author.id
                                 }).then(async (collected) => {
                                     if (collected.first().content == 'cancel') {
-                                        message.reply(usercancel)
+                                        message.channel.createMessage(usercancel)
                                     }
                                     const doc = db.collection('users').doc(message.author.id)
-                                    await doc.set({ id: message.author.id, name: username, TrainerID: userid, mains: { one: userpokemains }, rank: { rank:'Beginner', class:'1'}})
+                                    await doc.set({ id: message.author.id, name: username, TrainerID: userid, mains: { one: userpokemains }, rank: { rank: 'Beginner', class: '1' } })
                                 })
                             )
 
                         }).catch(() => {
                             // what to do if a user takes too long goes here 
-                            message.reply(timeout);
+                            message.channel.createMessage(timeout);
                         }))
                 }).catch(() => {
                     // what to do if a user takes too long goes here 
-                    message.reply(timeout);
+                    message.channel.createMessage(timeout);
                 }))
         }).catch(() => {
             // what to do if a user takes too long goes here 
-            message.reply(timeout);
+            message.channel.createMessage(timeout);
         }));
 
 }
@@ -76,17 +77,17 @@ module.exports = {
             case "view":
                 console.log(args[1])
                 if (args[1] === undefined) {
-                    return message.channel.send("> Please make sure you say a player's **Pokémon Unite** username.")
+                    return message.channel.createMessage("> Please make sure you say a player's **Pokémon Unite** username.")
                 } else {
                     await console.log(message.author.id)
                     var data = db.collection('users').get()
                     let user = data.data()
                     if (user === undefined) {
                         console.log("no user by that uuid.");
-                        return message.channel.send("> No User found. Did you type in the person's **Pokémon Unite** Username?")
+                        return message.channel.createMessage("> No User found. Did you type in the person's **Pokémon Unite** Username?")
                     } else {
                         if (user.mains.two === null) {
-                            message.channel.send({ embed: userLookup2 })
+                            message.channel.createMessage({ embed: userLookup2 })
                         } else {
                             const userlookup = {
                                 "title": `Profile Info: ${user.name}`,
@@ -127,9 +128,9 @@ module.exports = {
                                 ]
                             };
                             if (user.mains.two === null) {
-                                message.channel.send({ embed: userLookup2 })
+                                message.channel.createMessage({ embed: userLookup2 })
                             } else {
-                                message.channel.send({ embed: userlookup });
+                                message.channel.createMessage({ embed: userlookup });
                             }
                         }
                     }
@@ -138,7 +139,7 @@ module.exports = {
                 break
             default:
                 if (args[1] !== undefined)
-                    return message.channel.send("> Please check u.help profile.")
+                    return message.channel.createMessage("> Please check u.help profile.")
                 var data = db.collection('users').doc(message.author.id);
                 var profiles = await data.get();
                 var user = profiles.data();
@@ -187,9 +188,9 @@ module.exports = {
                 ]
             };
             if (user.mains.two === null) {
-                message.channel.send({ embed: userLookup2 })
+                message.channel.createMessage({ embed: userLookup2 })
             } else {
-                message.channel.send({ embed: userlookup });
+                message.channel.createMessage({ embed: userlookup });
             }
         }
     }
