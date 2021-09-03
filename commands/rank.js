@@ -7,7 +7,7 @@ module.exports = {
         if (user.exist) {return message.channel.createMessage("> User Profile not found. Go to `u.profile` or click the button below to start profile creation.")}
         let userdebug = await user.get()
         let userinfo = userdebug.data()
-        message.channel.createMessage([{
+        message.channel.createMessage({
              content:`> ${userinfo.name}'s Rank info\n> Rank ${userinfo.rank.rank} Class ${userinfo.rank.class}\n> To change this, choose from the buttons below.`,
              components: [{
                  "type": 1,
@@ -18,6 +18,6 @@ module.exports = {
                     "custom_id":"rankChange" 
                  }]
              }]
-    }])   
+    })   
     }
 }
