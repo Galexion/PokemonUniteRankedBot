@@ -5,10 +5,7 @@
 let user1 = {
   name: "default",
   ID: "ID"
-}
-console.log(user1)
-// funtion to redefine user
-
+} 
 // Get current Date
 let date_ob = new Date();
 let hours = date_ob.getHours();
@@ -23,7 +20,7 @@ module.exports = {
       "footer": {
         "text": `No Username | No Trainer ID | ${time}`
       },
-      "fields":[
+      "fields": [
         {
           "name": "Preform u.profile to create a profile.",
           "value": "**This will start a profile creation screen.**\n**You can also click the button below to start the creation process.**"
@@ -32,25 +29,26 @@ module.exports = {
     }
   },
   //profile command
-  userlookup(user){
+  userlookup(user) {
     return {
-    "title": `Profile Info: ${user.name}`,
-    "color": 2884926,
-    "footer": {
+      "title": `Profile Info: ${user.name}`,
+      "color": 2884926,
+      "footer": {
         "text": `Pokémon Unite User Lookup / Trainer ID: ${user.TrainerID}`
-    },
-    "author": {
+      },
+      "author": {
         "name": "Pokémon Unite Ranked Bot: Search Mode"
-    },
-    "fields": [{
+      },
+      "fields": [{
         "name": "Current MAIN pokémon:",
         "value": `${user.mains.one}`
-    },
-    {
+      },
+      {
         "name": "Current Rank:",
         "value": `${user.rank.rank} class ${user.rank.class}`
-    }]}
-},
+      }]
+    }
+  },
 
   // match command
   match(user) {
@@ -70,6 +68,57 @@ module.exports = {
             "value": "**select from the buttons below to make a selection.**"
           }
         ]
+      }
+    }
+  },
+  // Append files embeds.
+  //createProfile append
+  sfs: {
+    "title": "What is your Pokemon Unite Username?",
+    "description": "Send your Pokemon Unite Username in here.\n**Max Time: 20 Seconds**",
+    "color": 4361662,
+    "footer": {
+      "text": "Profile is being created | ${time}"
+    },
+    "author": {
+      "name": "PokeRanked"
+    }
+  },
+  sss: {
+    "title": "What is your Trainer ID?",
+    "description": "Send your Pokemon Unite Username in here.\n**Max Time: 20 Seconds**",
+    "color": 4361662,
+    "footer": {
+      "text": "Profile is being created | ${time}"
+    },
+    "image": {
+      "url": "https://firebasestorage.googleapis.com/v0/b/pokemonu-unite-ranked-backend.appspot.com/o/TrainerID.png?alt=media&token=086d695a-77b2-45d9-a19e-ee8acecb9ec7"
+    },
+    "author": {
+      "name": "PokeRanked"
+    }
+  },
+  sts: {
+    "title": "Which Pokemon do you Main?",
+    "description": "(FYI, \"Mains\" are the pokemon you choose to play as the most, and feel like you do the best with.)\nHave more then one? Just type that one!\n(**Misuse of this may cause your`- ;/ profile to get wiped from PokeRanked Server.)\n**Max Time: 20 Seconds**",
+    "color": 4361662,
+    "footer": {
+      "text": "Profile is being created | ${time}"
+    },
+    "author": {
+      "name": "PokeRanked"
+    }
+  },
+  sfhs(name, userid, userpokemains) {
+    return {
+      "title": "Verify that everything is correct.",
+      "description": `> Confirm that all is correct.\n> Username: ${name}\n> User ID: ${userid}\n> Your Mains: ${userpokemains}\n > Confirm with \`yes\` or cancel with \`cancel\` and restart with \`u.profile\`.\n> ATTN: **After this, head to \`u.rank\` to change your rank.**\n>You Can't change this afterwards unless you contact Galexion#0612.`,
+      "color": 4361662,
+      "footer": {
+        "text": "Profile is being created | ${time}"
+      },
+      "author": {
+        "name": "PokeRanked"
       }
     }
   }
