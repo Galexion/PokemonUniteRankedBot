@@ -5,7 +5,7 @@
 let user1 = {
   name: "default",
   ID: "ID"
-} 
+}
 // Get current Date
 let date_ob = new Date();
 let hours = date_ob.getHours();
@@ -28,25 +28,44 @@ module.exports = {
       ]
     }
   },
+  // browse command
+  browse(match, user, i) {
+    return {
+      "title": `Found A Match! (Index ${i})`,
+      "color": 2884926,
+      "footer": {
+        "text": `Pokémon Unite Match Found || Username: ${user.name} / Trainer ID: ${user.TrainerID}`
+      },
+      "author": {
+        "name": `> Found Match, Sent by ${match.author}`
+      },
+      "fields": [{
+        "name": ">> Looking for Rank"
+      }
+      ]
+    }
+  },
   //profile command
   userlookup(user) {
     return {
-      "title": `Profile Info: ${user.name}`,
-      "color": 2884926,
-      "footer": {
-        "text": `Pokémon Unite User Lookup / Trainer ID: ${user.TrainerID}`
-      },
-      "author": {
-        "name": "Pokémon Unite Ranked Bot: Search Mode"
-      },
-      "fields": [{
-        "name": "Current MAIN pokémon:",
-        "value": `${user.mains.one}`
-      },
-      {
-        "name": "Current Rank:",
-        "value": `${user.rank.rank} class ${user.rank.class}`
-      }]
+      "embed": {
+        "title": `Profile Info: ${user.name}`,
+        "color": 2884926,
+        "footer": {
+          "text": `Pokémon Unite User Lookup / Trainer ID: ${user.TrainerID}`
+        },
+        "author": {
+          "name": "Pokémon Unite Ranked Bot: Search Mode"
+        },
+        "fields": [{
+          "name": "Current MAIN pokémon:",
+          "value": `${user.mains.one}`
+        },
+        {
+          "name": "Current Rank:",
+          "value": `${user.rank.rank} class ${user.rank.class}`
+        }]
+      }
     }
   },
 

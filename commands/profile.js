@@ -107,7 +107,9 @@ module.exports = {
             setup(message, db);
             return;
         } else {
-            message.channel.createMessage(userlookup(user))
+            message.channel.createMessage(userlookup(user)).catch(err => {
+                console.log(err)
+            })
         }
     }
 };
