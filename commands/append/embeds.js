@@ -31,18 +31,30 @@ module.exports = {
   // browse command
   browse(match, user, i) {
     return {
-      "title": `Found A Match! (Index ${i})`,
-      "color": 2884926,
-      "footer": {
-        "text": `Pokémon Unite Match Found || Username: ${user.name} / Trainer ID: ${user.TrainerID}`
-      },
-      "author": {
-        "name": `> Found Match, Sent by ${match.author}`
-      },
-      "fields": [{
-        "name": ">> Looking for Rank"
+      "embed": {
+        "title": `Found A Match! (Index ${i})`,
+        "color": 2884926,
+        "footer": {
+          "text": `Pokémon Unite Match Found || Sent at ${match.timestamp} || Username: ${user.name} / Trainer ID: ${user.TrainerID}`
+        },
+        "author": {
+          "name": `> Found Match, Sent by ${match.creator}`
+        },
+        "fields": [
+          {
+            "name": ">> Message:",
+            "value": `${match.message}`
+          },
+          {
+            "name": ">> Looking for Rank(s)",
+            "value": `${match.rank}`
+          },
+          {
+            "name": ">> People already In",
+            "value": `${match.people} \`This is not real time.\``
+          }
+        ]
       }
-      ]
     }
   },
   //profile command
