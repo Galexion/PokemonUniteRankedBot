@@ -1,11 +1,4 @@
 //This file contains all the embeds needed for commands.
-
-
-// fallback user info
-let user1 = {
-  name: "default",
-  ID: "ID"
-}
 // Get current Date
 let date_ob = new Date();
 let hours = date_ob.getHours();
@@ -35,7 +28,7 @@ module.exports = {
         "title": `Found A Match! (Index ${i})`,
         "color": 2884926,
         "footer": {
-          "text": `Pokémon Unite Match Found || Sent at ${match.timestamp} || Username: ${user.name} / Trainer ID: ${user.TrainerID}`
+          "text": `Pokémon Unite Match Found || Sent at ${new Date(match.timestamp._seconds * 1000).toISOString().substr(11, 8)} UTC || Username: ${user.name} / Trainer ID: ${user.TrainerID}`
         },
         "author": {
           "name": `> Found Match, Sent by ${match.creator}`
@@ -52,6 +45,10 @@ module.exports = {
           {
             "name": ">> People already In",
             "value": `${match.people} \`This is not real time.\``
+          },
+          {
+            "name": ">> Invite Link",
+            "value": `${match.invite}`
           }
         ]
       }
@@ -105,51 +102,59 @@ module.exports = {
   // Append files embeds.
   //createProfile append
   sfs: {
-    "title": "What is your Pokemon Unite Username?",
-    "description": "Send your Pokemon Unite Username in here.\n**Max Time: 20 Seconds**",
-    "color": 4361662,
-    "footer": {
-      "text": "Profile is being created | ${time}"
-    },
-    "author": {
-      "name": "PokeRanked"
+    "embed": {
+      "title": "What is your Pokemon Unite Username?",
+      "description": "Send your Pokemon Unite Username in here.\n**Max Time: 20 Seconds**",
+      "color": 4361662,
+      "footer": {
+        "text": `Profile is being created | ${time}`
+      },
+      "author": {
+        "name": "PokeRanked"
+      }
     }
   },
   sss: {
-    "title": "What is your Trainer ID?",
-    "description": "Send your Pokemon Unite Username in here.\n**Max Time: 20 Seconds**",
-    "color": 4361662,
-    "footer": {
-      "text": "Profile is being created | ${time}"
-    },
-    "image": {
-      "url": "https://firebasestorage.googleapis.com/v0/b/pokemonu-unite-ranked-backend.appspot.com/o/TrainerID.png?alt=media&token=086d695a-77b2-45d9-a19e-ee8acecb9ec7"
-    },
-    "author": {
-      "name": "PokeRanked"
+    "embed": {
+      "title": "What is your Trainer ID?",
+      "description": "Send your Pokemon Unite Username in here.\n**Max Time: 20 Seconds**",
+      "color": 4361662,
+      "footer": {
+        "text": `Profile is being created | ${time}`
+      },
+      "image": {
+        "url": "https://firebasestorage.googleapis.com/v0/b/pokemonu-unite-ranked-backend.appspot.com/o/TrainerID.png?alt=media&token=086d695a-77b2-45d9-a19e-ee8acecb9ec7"
+      },
+      "author": {
+        "name": "PokeRanked"
+      }
     }
   },
   sts: {
-    "title": "Which Pokemon do you Main?",
-    "description": "(FYI, \"Mains\" are the pokemon you choose to play as the most, and feel like you do the best with.)\nHave more then one? Just type that one!\n(**Misuse of this may cause your`- ;/ profile to get wiped from PokeRanked Server.)\n**Max Time: 20 Seconds**",
-    "color": 4361662,
-    "footer": {
-      "text": "Profile is being created | ${time}"
-    },
-    "author": {
-      "name": "PokeRanked"
+    "embed": {
+      "title": "Which Pokemon do you Main?",
+      "description": "(FYI, \"Mains\" are the pokemon you choose to play as the most, and feel like you do the best with.)\nHave more then one? Just type that one!\n(**Misuse of this may cause your profile to get wiped from PokeRanked Server.**)\n**Max Time: 20 Seconds**",
+      "color": 4361662,
+      "footer": {
+        "text": `Profile is being created | ${time}`
+      },
+      "author": {
+        "name": "PokeRanked"
+      }
     }
   },
   sfhs(name, userid, userpokemains) {
     return {
-      "title": "Verify that everything is correct.",
-      "description": `> Confirm that all is correct.\n> Username: ${name}\n> User ID: ${userid}\n> Your Mains: ${userpokemains}\n > Confirm with \`yes\` or cancel with \`cancel\` and restart with \`u.profile\`.\n> ATTN: **After this, head to \`u.rank\` to change your rank.**\n>You Can't change this afterwards unless you contact Galexion#0612.`,
-      "color": 4361662,
-      "footer": {
-        "text": "Profile is being created | ${time}"
-      },
-      "author": {
-        "name": "PokeRanked"
+      "embed": {
+        "title": "Verify that everything is correct.",
+        "description": `> Confirm that all is correct.\n> Username: ${name}\n> User ID: ${userid}\n> Your Mains: ${userpokemains}\n > Confirm with \`yes\` or cancel with \`cancel\` and restart with \`u.profile\`.\n> ATTN: **After this, head to \`u.rank\` to change your rank.**\n>You Can't change this afterwards unless you contact Galexion#0612.`,
+        "color": 4361662,
+        "footer": {
+          "text": `Profile is being created | ${time}`
+        },
+        "author": {
+          "name": "PokeRanked"
+        }
       }
     }
   }
