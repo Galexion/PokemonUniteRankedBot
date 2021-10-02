@@ -69,6 +69,7 @@
     "end-of-stream": "1.4.4",
     "ent": "2.2.0",
     "eris": "0.15.1",
+    "eris-components": "^1.0.1",
     "eris-reactions": "0.1.4",
     "escalade": "3.1.1",
     "event-target-shim": "5.0.1",

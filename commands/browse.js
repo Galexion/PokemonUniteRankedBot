@@ -1,5 +1,5 @@
 // Import Embed(s)
-const {browse} = require("./append/embeds") 
+const {browse, match} = require("./append/embeds") 
 module.exports = {
     name: "browse",
     description: "Browse the first 3 current Recruit messages.",
@@ -14,7 +14,8 @@ module.exports = {
         const matchdoc = db.collection('match');
         const matchdebug = await matchdoc.limit(3).get();
         matchdebug.forEach(doc => {
-            message.channel.createMessage(browse(doc.data(),user,i));
+            message.channel.createMessage(browse(doc.data(),user,i))
+            i++
         })
 
     }

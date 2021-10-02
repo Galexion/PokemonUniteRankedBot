@@ -1,5 +1,7 @@
-# PokemonUniteRankedBot
+# PokeUnite
 to help find other people to play ranked with.
+
+This is a development build. (Interaction's)
 
 ## Overview
 Finding premade matches is hard, even if you have friends that play unite.

@@ -5,10 +5,10 @@ let { sfs, sss, sts, sfhs } = require("./embeds")
 //Code
 module.exports = {
 
-    async (message, db) {
+    async setup(message, db) {
         const filter = m => m.author.id === message.author.id;
         let usercancel = "Profile Creation has been canceled. do ``u.profile to start it again.``";
-        let timeout = "> Connection Lost. Please try again."
+        let timeout = "> Connection Lost. Please try again.\n> Timeout (Error 0)"
         let messagesFilter = {
             max: 1, // leave this the same
             time: 30000, // time in MS. there are 1000 MS in a second 
@@ -66,8 +66,9 @@ module.exports = {
         if (promptContent === 'cancel') {
             return message.channel.createMessage(usercancel);
         };
-    
-        // You want to add promptContent === "no" or sorta next time, something that suits to you :)
+        if (promptContent === 'no') {
+            return message.channel.createMessage("> Canceled by user. \n> Reason: User Info was not correct, User aborted creation process.")
+        }
         const doc = db.collection('users').doc(message.author.id);
         await doc.set({ id: message.author.id, name: name, TrainerID: userid, mains: { one: userpokemains }, rank: { rank: 'Beginner', class: '1' } })
     }

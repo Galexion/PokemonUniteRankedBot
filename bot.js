@@ -1,8 +1,10 @@
 let { token, prefix } = require("./config.json")
 //Config Eris
+const ErisComponents = require('eris-components');
 const eris = require("eris");
 require('pluris')(eris);
-let client = new eris(token);
+let bot = new eris(token);
+let client = ErisComponents.Client(bot);
 //config commandsFiles
 const fs = require("fs")
 const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
@@ -18,7 +20,7 @@ const db = admin.firestore();
 
 client.on("ready", () => {
     client.editStatus("idle", {name:"Pokemon Unite", type: 5})
-    console.log("PokeRanked ERIS version online.\nNote this version is a rewrite, and won't have all of the features of the current version, yet.");
+    console.log("PokeRanked Development Version 5");
 });
 
 client.on("messageCreate", async message => {
@@ -36,7 +38,7 @@ client.on("messageCreate", async message => {
 	if (!client.commands.has(command)) return;
 
 	try {
-		client.commands.get(command).execute(message, args, client, db);
+		client.commands.get(command).execute(message, args, client, db, ErisComponents);
 	} catch (error) {
 		console.error(error);
 		message.channel.createMessage('there was an error trying to execute that command!');
